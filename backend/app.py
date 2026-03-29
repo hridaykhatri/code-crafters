@@ -18,10 +18,18 @@ def create_app():
     from routes.auth_routes import auth_bp
     from routes.reimbursement_routes import reimb_bp
     from routes.analytics_routes import analytics_bp
+    from routes.admin import admin_bp
+    from routes.expense import expense_bp
+    from routes.approval import approval_bp
+    from routes.analytics import analytics_bp as analytics_main_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(reimb_bp, url_prefix="/api/reimbursements")
     app.register_blueprint(analytics_bp, url_prefix="/api/analytics")
+    app.register_blueprint(admin_bp, url_prefix="/api/admin")
+    app.register_blueprint(expense_bp, url_prefix="/api/expenses")
+    app.register_blueprint(approval_bp, url_prefix="/api/approval")
+    app.register_blueprint(analytics_main_bp, url_prefix="/api/dashboard")
 
     with app.app_context():
         db.create_all()
